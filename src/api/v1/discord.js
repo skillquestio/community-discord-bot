@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const discord = require('../../services/discord/index')
 
 router.post('/messages', (req, res, next) => {
   if (req.headers.authorization !== process.env.BUBBLE_API_KEY) {
@@ -8,7 +9,9 @@ router.post('/messages', (req, res, next) => {
   if (!message || !channel) {
     return res.status(400).send({ error: 'message and channel are required in body' })
   }
-  res.status(200).send({ message: 'hi' })
+  discord.channels.cache.get(channel).send(message)
+
+  res.status(200).send()
 })
 
 module.exports = router

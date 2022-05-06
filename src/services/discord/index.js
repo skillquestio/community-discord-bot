@@ -12,3 +12,5 @@ discord.once('ready', () => {
 })
 
 discord.login(process.env.DISCORD_TOKEN)
+
+module.exports = discord
